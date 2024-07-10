@@ -22,11 +22,12 @@
 </head>
 
 <body>
-
+        
 <nav class="navbar navbar-light bg-light">
     <div class="container">
         <a style="text-decoration: none;" href="/"><span class="navbar-brand mb-0 h1">Todo</span></a>
         <a href="/create"><span class="btn btn-primary">Create Todo</span></a>
+        <a href="/login"><span class="btn btn-primary">Login</span></a>
     </div>
 </nav>
 

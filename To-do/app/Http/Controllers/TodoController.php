@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Dotenv\Exception\ValidationException;
+use Session;
+
 
 class TodoController extends Controller
 {
     public function index(){
-        $todo = Todo::all();
+        if ($value = Session::get('id') != 0){
+        $todo = Todo::getTodos();
         return view('index')->with('todos', $todo);
+    }
+    else{
+        return redirect('login');
+    }
      }
 
     public function create(){
@@ -34,7 +41,7 @@ class TodoController extends Controller
             $this->validate(request(), [
                 'name' => ['required'],
                 'description' => ['required'],
-                // 'checked'=>['nullable']
+                
             ]);
         } catch (ValidationException $e) {
         }
@@ -62,7 +69,7 @@ class TodoController extends Controller
 
     public function store(){
 
-       
+        $value = Session::get('id');
        
        try {
             $this->validate(request(), [
@@ -79,7 +86,7 @@ class TodoController extends Controller
         //On the left is the field name in DB and on the right is field name in Form/view
         $todo->name = $data['name'];
         $todo->description = $data['description'];
-        // $todo->checked = $data['checked'];
+        $todo->user_id = $value ;
         $todo->save();
 
         session()->flash('success', 'Todo created succesfully');
@@ -88,5 +95,11 @@ class TodoController extends Controller
 
 
 
+    }
+
+    public function showTodos(){
+       
+        $data = Todo::all();
+        return $data->toJson();
     }
 }

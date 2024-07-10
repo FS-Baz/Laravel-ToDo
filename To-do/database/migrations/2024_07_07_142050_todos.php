@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('todo', function (Blueprint $table) {
+        Schema::create('todos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->string('name'); 
+            $table->text('description'); 
             $table->timestamps();
-            $table->string('name'); //I added the name column
-            $table->text('description'); //I added the description column
         });
+
     }
     
 public function down()
     {
-        Schema::dropIfExists('todo');
+        Schema::dropIfExists('todos');
     }
 };
