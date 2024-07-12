@@ -10,13 +10,15 @@ use Session;
 class Todo extends Model
 {
     use HasFactory;
-
+    
     public static function getTodos(){
-        $value = Session::get('id');
+        
+        $value = auth()->user()->id;
+        error_log($value);
         $todo = DB::table('todos')
                 ->where('user_id', '=', $value)
                 ->get();
-                error_log($todo);   
+                // error_log($todo);   
                 return $todo;
     }
 }

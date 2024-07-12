@@ -15,7 +15,7 @@ class UserController extends Controller
     public function login(){
         request()->session()->forget('id');
         $value = 0;
-        $value = Session::get('id');
+        // $value = Session::get('id');
         
         error_log("in the login page");
         error_log($value);

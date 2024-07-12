@@ -69,7 +69,7 @@ class TodoController extends Controller
 
     public function store(){
 
-        $value = Session::get('id');
+        $value = auth()->user()->id;
        
        try {
             $this->validate(request(), [

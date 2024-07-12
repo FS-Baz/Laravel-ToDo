@@ -26,3 +26,7 @@ Route::post('auth-user', [UserController::class, 'auth'])-> name('auth-user');
 Route::get('showTodos', [TodoController::class, 'showTodos']);
 
 Route::get('getUsers', [UserController::class, 'getUsers']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
